@@ -12,4 +12,9 @@ export class DogService {
     const result = await this.repository.findAll();
     return result;
   }
+
+  public async create(value: Dog): Promise<Dog> {
+    const result = await this.repository.create(value);
+    return result?.toJSON();
+  }
 }

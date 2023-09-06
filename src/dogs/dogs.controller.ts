@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { Dog } from './models/dogs.entity';
 import { DogService } from './dogs.service';
 
@@ -9,5 +9,11 @@ export class DogController {
   @Get()
   public async getDogs(): Promise<Dog[]> {
     return await this.service.getList();
+  }
+
+  @Post()
+  public async createDog(@Body() body: Dog): Promise<Dog> {
+    console.log();
+    return await this.service.create(body);
   }
 }
