@@ -17,4 +17,16 @@ export class DogService {
     const result = await this.repository.create(value);
     return result?.toJSON();
   }
+
+  public async update(id: string, value: Partial<Dog>): Promise<boolean> {
+    if (id && !Number.isNaN(Number(id))) {
+      const result = await this.repository.update(value, {
+        where: { id },
+      });
+
+      return result?.[0] > 0;
+    }
+
+    return false;
+  }
 }
