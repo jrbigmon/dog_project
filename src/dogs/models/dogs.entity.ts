@@ -1,11 +1,14 @@
 import {
+  BelongsTo,
   Column,
   CreatedAt,
   DeletedAt,
+  ForeignKey,
   Model,
   Table,
   UpdatedAt,
 } from 'sequelize-typescript';
+import { User, UserEntity } from '../../users/models/users.entity';
 
 export interface Dog {
   id: number;
@@ -14,8 +17,8 @@ export interface Dog {
   height: number;
   breed: string;
   createdAt: Date;
-  updateAt: Date;
-  deleteAt?: Date;
+  updatedAt: Date;
+  deletedAt?: Date;
 }
 
 @Table({
@@ -26,6 +29,13 @@ export interface Dog {
 export class DogEntity extends Model<Dog> {
   @Column({ primaryKey: true, autoIncrement: true })
   id: number;
+
+  @ForeignKey(() => UserEntity)
+  @Column({ field: 'user_id', allowNull: false })
+  public userId!: number;
+
+  @BelongsTo(() => UserEntity)
+  public user: User;
 
   @Column
   name: string;
@@ -45,7 +55,7 @@ export class DogEntity extends Model<Dog> {
 
   @UpdatedAt
   @Column
-  updateAt: Date;
+  updatedAt: Date;
 
   @DeletedAt
   @Column

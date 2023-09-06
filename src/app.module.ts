@@ -2,8 +2,10 @@ import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { DogEntity } from './dogs/models/dogs.entity';
 import { DogModule } from './dogs/dogs.module';
+import { UserEntity } from './users/models/users.entity';
+import { UsersModule } from './users/users.module';
 
-const modules = [DogModule];
+const modules = [DogModule, UsersModule];
 
 @Module({
   imports: [
@@ -15,7 +17,7 @@ const modules = [DogModule];
       password: '',
       database: 'project_dogs',
       autoLoadModels: true,
-      models: [DogEntity],
+      models: [DogEntity, UserEntity],
     }),
     ...modules,
   ],

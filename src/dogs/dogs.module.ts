@@ -3,8 +3,9 @@ import { Module } from '@nestjs/common';
 import { DogController } from './dogs.controller';
 import { DogService } from './dogs.service';
 import { DogEntity } from './models/dogs.entity';
+import { UserEntity } from '../users/models/users.entity';
 
-const models = SequelizeModule.forFeature([DogEntity]);
+const models = SequelizeModule.forFeature([DogEntity, UserEntity]);
 
 @Module({
   imports: [models],
